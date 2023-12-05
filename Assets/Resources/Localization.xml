@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Keys xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Key Name="Test">
+		<Translates>
+			<en>en</en>
+			<ru>ru</ru>
+		</Translates>
+	</Key>
+	<Key Name="Menu">
+		<Translates>
+			<en>Menu</en>
+			<ru>Меню</ru>
+		</Translates>
+	</Key>
+	<Key Name="Sound">
+		<Translates>
+			<en>Sound</en>
+			<ru>Звук</ru>
+		</Translates>
+	</Key>
+	<Key Name="Back">
+		<Translates>
+			<en>Back</en>
+			<ru>Назад</ru>
+		</Translates>
+	</Key>
+	<Key Name="Low">
+		<Translates>
+			<en>Low</en>
+			<ru>Низкая</ru>
+		</Translates>
+	</Key>
+	<Key Name="Medium">
+		<Translates>
+			<en>Medium</en>
+			<ru>Средняя</ru>
+		</Translates>
+	</Key>
+	<Key Name="High">
+		<Translates>
+			<en>High</en>
+			<ru>Высокая</ru>
+		</Translates>
+	</Key>
+	<Key Name="Play">
+		<Translates>
+			<en>Play</en>
+			<ru>Играть</ru>
+		</Translates>
+	</Key>
+	<Key Name="Exit">
+		<Translates>
+			<en>Exit</en>
+			<ru>Выход</ru>
+		</Translates>
+	</Key>
+	<Key Name="Or">
+		<Translates>
+			<en>Or</en>
+			<ru>Или</ru>
+		</Translates>
+	</Key>
+	<Key Name="Settings">
+		<Translates>
+			<en>Settings</en>
+			<ru>Настройки</ru>
+		</Translates>
+	</Key>
+	<Key Name="Select level">
+		<Translates>
+			<en>Select level</en>
+			<ru>Выберите уровень</ru>
+		</Translates>
+	</Key>
+	<Key Name="Level complete">
+		<Translates>
+			<en>Level complete</en>
+			<ru>Уровень пройден</ru>
+		</Translates>
+	</Key>
+	<Key Name="Congratulations!">
+		<Translates>
+			<en>Congratulations!</en>
+			<ru>Поздравляем!</ru>
+		</Translates>
+	</Key>
+	<Key Name="Menu">
+		<Translates>
+			<en>Menu</en>
+			<ru>Меню</ru>
+		</Translates>
+	</Key>
+	<Key Name="Next level">
+		<Translates>
+			<en>Next level</en>
+			<ru>Следующий уровень</ru>
+		</Translates>
+	</Key>
+	<Key Name="Game Over">
+		<Translates>
+			<en>Game Over</en>
+			<ru>Игра окончена</ru>
+		</Translates>
+	</Key>
+	<Key Name="Do you want to retry?">
+		<Translates>
+			<en>Do you want to retry?</en>
+			<ru>Перезапустить?</ru>
+		</Translates>
+	</Key>
+	<Key Name="Vibration">
+		<Translates>
+			<en>Vibration</en>
+			<ru>Вибрация</ru>
+		</Translates>
+	</Key>
+	<Key Name="Yes">
+		<Translates>
+			<en>Yes</en>
+			<ru>Да</ru>
+		</Translates>
+	</Key>
+	<Key Name="Retry">
+		<Translates>
+			<en>Retry</en>
+			<ru>Перезапустить</ru>
+		</Translates>
+	</Key>
+	<Key Name="Paused">
+		<Translates>
+			<en>Paused</en>
+			<ru>Пауза</ru>
+		</Translates>
+	</Key>
+	<Key Name="Contiune">
+		<Translates>
+			<en>Contiune</en>
+			<ru>Продолжить</ru>
+		</Translates>
+	</Key>
+	<Key Name="Restart">
+		<Translates>
+			<en>Restart</en>
+			<ru>Перезапустить</ru>
+		</Translates>
+	</Key>
+	<Key Name="Sound">
+		<Translates>
+			<en>Sound</en>
+			<ru>Звук</ru>
+		</Translates>
+	</Key>
+	<Key Name="En">
+		<Translates>
+			<en>En</en>
+			<ru>En</ru>
+		</Translates>
+	</Key>
+	<Key Name="Ру">
+		<Translates>
+			<en>Ру</en>
+			<ru>Ру</ru>
+		</Translates>
+	</Key>
+	<Key Name="No">
+		<Translates>
+			<en>No</en>
+			<ru>Нет</ru>
+		</Translates>
+	</Key>
+	<Key Name="Are you over 14 years old?">
+		<Translates>
+			<en>Are you over 14 years old?</en>
+			<ru>Вам уже исполнилось 14 лет?</ru>
+		</Translates>
+	</Key>
+	<Key Name="Levels">
+		<Translates>
+			<en>Levels</en>
+			<ru>Уровни</ru>
+		</Translates>
+	</Key>
+	<Key Name="Save progress">
+		<Translates>
+			<en>Save progress</en>
+			<ru>Сохранить прогресс</ru>
+		</Translates>
+	</Key>
+	<Key Name="Load progress">
+		<Translates>
+			<en>Load progress</en>
+			<ru>Загрузить прогресс</ru>
+		</Translates>
+	</Key>
+	<Key Name="Loading...">
+		<Translates>
+			<en>Loading...</en>
+			<ru>Загрузка...</ru>
+		</Translates>
+	</Key>
+	<Key Name="CloudNEWLINEsaving">
+		<Translates>
+			<en>CloudNEWLINEsaving</en>
+			<ru>ОблачноеNEWLINEсохранение</ru>
+		</Translates>
+	</Key>
+	<Key Name="Dinamit + 1">
+		<Translates>
+			<en>Dinamit + 1</en>
+			<ru>Динамит + 1</ru>
+		</Translates>
+	</Key>
+	<Key Name="Dinamit + 2">
+		<Translates>
+			<en>Dinamit + 2</en>
+			<ru>Динамит + 2</ru>
+		</Translates>
+	</Key>
+	<Key Name="Protection + 2">
+		<Translates>
+			<en>Protection + 2</en>
+			<ru>Защита комбо + 2</ru>
+		</Translates>
+	</Key>
+	<Key Name="Combo protection + 1">
+		<Translates>
+			<en>Combo protection + 1</en>
+			<ru>Защита комбо + 1</ru>
+		</Translates>
+	</Key>
+	<Key Name="Points">
+		<Translates>
+			<en>Points</en>
+			<ru>Счет очков</ru>
+		</Translates>
+	</Key>
+	<Key Name="SlowdownNEWLINEtime">
+		<Translates>
+			<en>SlowdownNEWLINEtime</en>
+			<ru>ЗамедлениеNEWLINEвремени</ru>
+		</Translates>
+	</Key>
+	<Key Name="-2 milliseconds reset time">
+		<Translates>
+			<en>-2 milliseconds reset time</en>
+			<ru>-2 миллисекунды восстановления</ru>
+		</Translates>
+	</Key>
+	<Key Name="No thanks">
+		<Translates>
+			<en>No thanks</en>
+			<ru>Нет, спасибо</ru>
+		</Translates>
+	</Key>
+	<Key Name="Triple result">
+		<Translates>
+			<en>Triple result</en>
+			<ru>Утроить монеты</ru>
+		</Translates>
+	</Key>
+	<Key Name="You've earned:">
+		<Translates>
+			<en>You've earned:</en>
+			<ru>Вы заработали:</ru>
+		</Translates>
+	</Key>
+	<Key Name="Combo">
+		<Translates>
+			<en>Combo</en>
+			<ru>Комбо</ru>
+		</Translates>
+	</Key>
+	<Key Name="FIRE">
+		<Translates>
+			<en>Fire</en>
+			<ru>ПОЖАР</ru>
+		</Translates>
+	</Key>
+	<Key Name="Touch to continue...">
+		<Translates>
+			<en>Touch to continue...</en>
+			<ru>Нажмите для продолжения...</ru>
+		</Translates>
+	</Key>
+	<Key Name="LT1">
+		<Translates>
+			<en>Touch the screen to close the doors. Close the doors directly in front of the running person.</en>
+			<ru>Коснитесь экрана, чтобы закрыть двери. Закройте двери прямо перед бегущим человеком.</ru>
+		</Translates>
+	</Key>
+	<Key Name="LT2">
+		<Translates>
+			<en>If the door hits a person, the timer for the doors to be ready to close again will instantly reset to zero.</en>
+			<ru>Попав дверью по человеку, таймер готовности дверей к новому закрытию мгновенно обнулится.</ru>
+		</Translates>
+	</Key>
+	<Key Name="LT3">
+		<Translates>
+			<en>Hit people with doors to score combos. If you miss a person, the combos will reset to zero. The more combos, the more points. The more points, the more coins you will receive.</en>
+			<ru>Попадайте дверями по людям, чтобы набивать комбо. Если вы пропустите человека, комбо обнулится. Чем больше комбо, тем больше очков. Чем больше очков, тем больше монет вы получите.</ru>
+		</Translates>
+	</Key>
+	<Key Name="LT4">
+		<Translates>
+			<en>Merge coins of the same level. If the merger is successful, you will receive additional coins in your score, and you can spend them.</en>
+			<ru>Соединяйте монеты одинакового уровня. При успешном слиянии вы получите дополнительные монеты в счет, и сможете их потратить.</ru>
+		</Translates>
+	</Key>
+	<Key Name="LT5">
+		<Translates>
+			<en>Click on the coin in the top right corner to open the store.</en>
+			<ru>Нажмите на монету в правом верхнем углу, чтобы открыть магазин.</ru>
+		</Translates>
+	</Key>
+	<Key Name="SUCCESS">
+		<Translates>
+			<en>SUCCESS</en>
+			<ru>УСПЕХ</ru>
+		</Translates>
+	</Key>
+	<Key Name="FAIL">
+		<Translates>
+			<en>FAIL</en>
+			<ru>НЕУДАЧА</ru>
+		</Translates>
+	</Key>
+</Keys>
