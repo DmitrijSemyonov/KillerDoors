@@ -46,7 +46,7 @@ public class ScoreAccounting : MonoBehaviour
 
         _losingZone.LosePerson += PersonLosed;
 
-        Invoke("InitCoinsCount", 0.1f);
+        InitCoinsCount();
     }
     private void InitCoinsCount()
     {

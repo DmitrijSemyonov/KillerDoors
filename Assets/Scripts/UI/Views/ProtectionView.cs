@@ -12,7 +12,7 @@ public class ProtectionView : MonoBehaviour
 
     private TextMeshProUGUI _textNextProtectionPrice;
 
-    void Start()
+    void Awake()
     {
         _appearingAndDisappearing = _protectionNumberText.GetComponent<AppearingAndDisappearingObject>();
         _losingZone = FindObjectOfType<LosingZone>();
@@ -25,7 +25,6 @@ public class ProtectionView : MonoBehaviour
 
     private void UpdateProtectionNumberText(int protection)
     {
-        _protectionNumberText.transform.localScale = CachedMath.Vector3Zero;
         _protectionNumberText.text = protection.ToString();
         _appearingAndDisappearing.StartAppearing();
     }

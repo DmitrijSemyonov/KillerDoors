@@ -10,7 +10,7 @@ public class DinamitView : MonoBehaviour
     private TextMeshProUGUI _dinamitNextPriceText;
     private AppearingAndDisappearingObject _dinamitNextPriceAppearing;
     private Shop _shop;
-    void Start()
+    void Awake()
     {
         _shop = FindObjectOfType<Shop>();
         _shop.DinamitCountChanged += UpdateDinamitNumberText;
@@ -24,13 +24,11 @@ public class DinamitView : MonoBehaviour
     }
     private void UpdateDinamitNumberText(int protection)
     {
-        _dinamitNumberText.transform.localScale = CachedMath.Vector3Zero;
         _dinamitNumberText.text = protection.ToString();
         _dinamitNumberAppearing.StartAppearing();
     }
     private void UpdateNextDinamitPriceText(int price)
     {
-        _dinamitNextPriceText.transform.localScale = CachedMath.Vector3Zero;
         _dinamitNextPriceText.text = price.ToString();
         _dinamitNextPriceAppearing.StartAppearing();
     }

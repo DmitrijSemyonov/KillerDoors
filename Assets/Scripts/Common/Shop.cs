@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class Shop : MonoBehaviour //Upgrades doors in DoorUpgrade classes aside
+public class Shop : MonoBehaviour 
 {
     [SerializeField] private int[] _protectionPrices = new int[5] {6, 25, 100, 400, 1600 };
 
@@ -44,14 +43,16 @@ public class Shop : MonoBehaviour //Upgrades doors in DoorUpgrade classes aside
 
     private LosingZone _losingZone;
 
-
-    private void Start()
+    private void Awake()
     {
         _losingZone = FindObjectOfType<LosingZone>();
-        _scoreAccounting = GetComponent<ScoreAccounting>();
         _losingZone.ProtectionChanged += ConfigureNextProtectionPrice;
         PlayerDataLoader.Instance.OnUpdate += InitDinamitCount;
-        Invoke("InitDinamitCount", 0.1f);
+    }
+    private void Start()
+    {
+        _scoreAccounting = GetComponent<ScoreAccounting>();
+        InitDinamitCount();
     }
     private void InitDinamitCount()
     {

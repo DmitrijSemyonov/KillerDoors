@@ -20,7 +20,7 @@ public class LosingZone : MonoBehaviour
     private void Start()
     {
         PlayerDataLoader.Instance.OnUpdate += InitProtection;
-        Invoke("InitProtection", 0.1f); //delay for subscribe others
+        InitProtection();
     }
     private void InitProtection()
     {

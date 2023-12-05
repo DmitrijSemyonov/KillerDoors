@@ -33,13 +33,12 @@ public class DoorUpgrade : MonoBehaviour
         {
             _door.UpgradeTimeReset(_upgradeStepOpenTime);
         }
-        Invoke("InitUpgradePrice", 0.1f); //Waiting for subscribers
+        InitUpgradePrice();
     }
     private void InitUpgradePrice()
     {
         UpgradePrice = (int) Math.Pow(2, _upgrade);
     }
-    //From button
     public void UpgradeDoor()
     {
         if (_scoreAccounting.CoinsCount < _upgradePrice) return;
