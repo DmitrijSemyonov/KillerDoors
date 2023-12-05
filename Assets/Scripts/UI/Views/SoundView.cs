@@ -12,8 +12,19 @@ public class SoundView : MonoBehaviour
         _soundToggle = GameObject.Find("SoundToggle").GetComponent<Toggle>();
         _settings = FindObjectOfType<Settings>();
 
-        _settings.SoundSwitchedAtStart += (b) => { _soundToggle.isOn = b; };
+        _settings.SoundSwitchedAtStart += SwitchSound;
 
         _soundToggle.onValueChanged.AddListener(_settings.TurnTheAudioSwitch);
+    }
+
+    private void SwitchSound(bool isActive)
+    {
+        _soundToggle.isOn = isActive;
+    }
+
+    private void OnDestroy()
+    {
+        if(_settings)
+           _settings.SoundSwitchedAtStart -= SwitchSound;
     }
 }
