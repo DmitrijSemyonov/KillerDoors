@@ -12,6 +12,10 @@ public class UpgradeDoorView : MonoCache
     private AppearingAndDisappearingObject _nextUpgradePriceAppearing;
     private Button _button;
     [SerializeField] private Vector3 _offsetPosition;
+    private void Awake()
+    {
+        _doorUpgrade.UpgradePriceChanged += UpdateNextUpgradePrice;
+    }
     void Start()
     {
         _button = GetComponentInChildren<Button>();
@@ -20,7 +24,6 @@ public class UpgradeDoorView : MonoCache
         _nextUpgradePriceAppearing = _nextUpgradePriceText.GetComponent<AppearingAndDisappearingObject>();
         _mainCamera = Camera.main;
 
-        _doorUpgrade.UpgradePriceChanged += UpdateNextUpgradePrice;
         enabled = false;
     }
     protected override void OnTick()

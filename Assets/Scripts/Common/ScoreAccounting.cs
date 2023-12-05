@@ -29,13 +29,16 @@ public class ScoreAccounting : MonoBehaviour
     public event Action<int> OnCoinsChanged;
     public event Action<int> OnPointsChanged;
     public event Action<Vector3, int> OnComboChanged;
+    private void Awake()
+    {
+        _dataLoader = PlayerDataLoader.Instance;
+        _dataLoader.OnUpdate += InitCoinsCount;
+    }
     void Start()
     {
         _doors = FindObjectsOfType<Door>();
         _losingZone = FindObjectOfType<LosingZone>();
         _inventory = FindObjectOfType<Inventory>();
-        _dataLoader = PlayerDataLoader.Instance;
-        _dataLoader.OnUpdate += InitCoinsCount;
         _gameModeManager = GetComponent<GameModeManager>();
         _gameModeManager.EndDoorGame += EndDoorGame;
 

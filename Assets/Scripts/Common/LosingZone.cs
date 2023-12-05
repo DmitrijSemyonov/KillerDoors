@@ -17,9 +17,12 @@ public class LosingZone : MonoBehaviour
         } }
     public event Action<int> ProtectionChanged;
 
-    private void Start()
+    private void Awake()
     {
         PlayerDataLoader.Instance.OnUpdate += InitProtection;
+    }
+    private void Start()
+    {
         InitProtection();
     }
     private void InitProtection()
