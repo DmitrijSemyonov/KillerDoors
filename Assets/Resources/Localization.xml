@@ -6,6 +6,24 @@
 			<ru>ru</ru>
 		</Translates>
 	</Key>
+	<Key Name="Example countable noun subkey">
+		<Translates>
+			<en>example</en>
+			<ru>пример/примера/примеров</ru>
+		</Translates>
+	</Key>
+	<Key Name="Combo +">
+		<Translates>
+			<en>Combo/NEWLINE+ /SUBKEY</en>
+			<ru>Комбо/NEWLINE+ /SUBKEY</ru>
+		</Translates>
+	</Key>
+	<Key Name="Combo">
+		<Translates>
+			<en>Combo/NEWLINE /SUBKEY</en>
+			<ru>Комбо/NEWLINE /SUBKEY</ru>
+		</Translates>
+	</Key>
 	<Key Name="Menu">
 		<Translates>
 			<en>Menu</en>
@@ -198,10 +216,10 @@
 			<ru>Загрузка...</ru>
 		</Translates>
 	</Key>
-	<Key Name="CloudNEWLINEsaving">
+	<Key Name="Cloud saving">
 		<Translates>
-			<en>CloudNEWLINEsaving</en>
-			<ru>ОблачноеNEWLINEсохранение</ru>
+			<en>Cloud/NEWLINEsaving</en>
+			<ru>Облачное/NEWLINEсохранение</ru>
 		</Translates>
 	</Key>
 	<Key Name="Dinamit + 1">
@@ -234,16 +252,16 @@
 			<ru>Счет очков</ru>
 		</Translates>
 	</Key>
-	<Key Name="SlowdownNEWLINEtime">
+	<Key Name="Slowdown time">
 		<Translates>
-			<en>SlowdownNEWLINEtime</en>
-			<ru>ЗамедлениеNEWLINEвремени</ru>
+			<en>Slowdown/NEWLINEtime</en>
+			<ru>Замедление/NEWLINEвремени</ru>
 		</Translates>
 	</Key>
-	<Key Name="-2 milliseconds reset time">
+	<Key Name="-2 ms reset time">
 		<Translates>
-			<en>-2 milliseconds reset time</en>
-			<ru>-2 миллисекунды восстановления</ru>
+			<en>-2 ms/NEWLINEreset time</en>
+			<ru>-2 мс/NEWLINEвосстано-/NEWLINEвления</ru>
 		</Translates>
 	</Key>
 	<Key Name="No thanks">
@@ -252,22 +270,16 @@
 			<ru>Нет, спасибо</ru>
 		</Translates>
 	</Key>
-	<Key Name="Triple result">
+	<Key Name="Multiply result">
 		<Translates>
-			<en>Triple result</en>
-			<ru>Утроить монеты</ru>
+			<en>Get x/SUBKEY result</en>
+			<ru>Получить x/SUBKEY результат</ru>
 		</Translates>
 	</Key>
 	<Key Name="You've earned:">
 		<Translates>
 			<en>You've earned:</en>
 			<ru>Вы заработали:</ru>
-		</Translates>
-	</Key>
-	<Key Name="Combo">
-		<Translates>
-			<en>Combo</en>
-			<ru>Комбо</ru>
 		</Translates>
 	</Key>
 	<Key Name="FIRE">

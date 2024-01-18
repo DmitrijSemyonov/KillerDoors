@@ -1,172 +1,196 @@
+using Helpers.Math;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-//Used CachedMath Vector3 SmoothDamp
-public class AppearingAndDisappearingObject : MonoCache
+
+namespace Helpers
 {
-    private bool _appearing;
-    private bool _disappearing;
-
-    [SerializeField] private float _durationSec = 0.7f;
-    private float _durationWithSmoothDampCoef;
-    private Vector3 _smoothDampVelocity;
-    [SerializeField] private bool _scale0AtAwake = true;
-    [SerializeField] private bool _childrensControl;
-
-    public bool IsDisappearing => _disappearing;
-    public event Action Appeared;
-    public event Action Disappeared;
-    private Vector3 _appearingVector;
-    private Vector3 _baseVector;
-    private int _animationAppearingStage =0;
-    private List<AppearingAndDisappearingObject> _childrens;
-    private ScrollRect[] _scrollRects;
-    public bool ChildrensControl { get { return _childrensControl; } }
-    protected virtual void Awake()
+    public class AppearingAndDisappearingObject : MonoBehaviour
     {
-        _durationWithSmoothDampCoef = _durationSec / 5.9f;
-
-        _baseVector = transform.localScale;
-        if (_baseVector.x == 0 || _baseVector.y == 0)
+        [SerializeField] private float _overscaleOnAppear = 1.2f;
+        [SerializeField] private float _durationSec = 0.7f;
+        [SerializeField] private bool _scale0AtAwake = true;
+        [SerializeField] private bool _childrensControl;
+        [SerializeField] private bool _ignoreReappearing;
+        [SerializeField] private bool _ignoreParentControl;
+        public bool ChildrensControl { get { return _childrensControl; } }
+        public bool IgnoreParentControl
         {
-            _baseVector = new Vector3(1f, 1f, 1f);
+            get => _ignoreParentControl;
+            set
+            {
+                _ignoreParentControl = value;
+                if (value)
+                    transform.parent.GetComponentInParent<AppearingAndDisappearingObject>().RemoveChild(this);
+                else
+                    GetComponentInParent<AppearingAndDisappearingObject>().AddChild(this);
+            }
+        }
+        public bool IsDisappearing => _disappearing;
+
+        public event Action Appeared;
+        public event Action Disappeared;
+
+        private bool _appearing;
+        private bool _disappearing;
+
+        private float _durationWithSmoothDampCoef;
+
+        private Vector3 _smoothDampVelocity;
+        private const float _smoothDampCoefficient = 5.9f;
+
+        private Vector3 _appearingVector;
+        private Vector3 _baseVector;
+
+        private int _animationAppearingStage = 0;
+
+        private List<AppearingAndDisappearingObject> _childrens;
+        private ScrollRect[] _scrollRects;
+
+
+        private void AddChild(AppearingAndDisappearingObject appearingAndDisappearingObject)
+        {
+            if (_childrens == null) return;
+            if (_childrens.Contains(appearingAndDisappearingObject)) return;
+
+            _childrens.Add(appearingAndDisappearingObject);
         }
 
-        _appearingVector = _baseVector * 1.2f;
-        
-        _scrollRects = GetComponentsInChildren<ScrollRect>();
+        public void RemoveChild(AppearingAndDisappearingObject appearingAndDisappearingObject)
+        {
+            if (_childrens == null) return;
 
-        if (_scale0AtAwake)
+            _childrens.Remove(appearingAndDisappearingObject);
+        }
+
+        public virtual void StartAppearing()
+        {
+            enabled = true;
+            _appearing = true;
+
+            if (!_ignoreReappearing)
+                transform.localScale = CachedMath.Vector3Zero;
+
+            if (_disappearing) { _disappearing = false; }
+        }
+        public virtual void StartDisappearing()
         {
             CheckAndSetActiveScrollRects(false);
-            transform.localScale = Vector3.zero;
-        }
-        if (_childrensControl)
-        {
-            _childrens = new List<AppearingAndDisappearingObject>(GetComponentsInChildren<AppearingAndDisappearingObject>());
-            _childrens.Remove(this);
-        }
-        if (!_appearing && !_disappearing)
-        {
-            enabled = false;
-        }
-    }
-    private void OnValidate()
-    {
-        _durationWithSmoothDampCoef = _durationSec / 5.9f;
-    }
-    protected override void OnTick()
-    {
-        if (_appearing)
-        {
-            Appearing();
-        }
 
-        if (_disappearing)
-        {
-            Disappearing();
-        }
-    }
+            enabled = true;
+            _disappearing = true;
 
-    private void Appearing()
-    {
-        if (_animationAppearingStage == 0)
-        {
-            transform.localScale = Vector3.SmoothDamp(transform.localScale, _appearingVector, ref _smoothDampVelocity,
-                _durationWithSmoothDampCoef * 0.5f, float.MaxValue, Time.unscaledDeltaTime);
+            if (_childrensControl)
+                _childrens.ForEach(x => x.StartDisappearing());
 
-            if (CachedMath.Compare(transform.localScale, _appearingVector))
+            if (_appearing)
             {
-                _animationAppearingStage = 1;
-                _smoothDampVelocity = CachedMath.Vector3Zero;
-            }
-        }
-        else
-        {
-            transform.localScale = Vector3.SmoothDamp(transform.localScale, _baseVector, ref _smoothDampVelocity,
-                _durationWithSmoothDampCoef * 0.5f, float.MaxValue, Time.unscaledDeltaTime);
-
-
-            if (CachedMath.Compare(transform.localScale, _baseVector))
-            {
-                _smoothDampVelocity = CachedMath.Vector3Zero;
-                _appearing = false;
-                transform.localScale = _baseVector;
-                enabled = false;
-                Appeared?.Invoke();
                 ResetAnimationAppearingStage();
-                CheckAndSetActiveScrollRects(true);
-                CheckAndStartAppearingChildrens();
+                _appearing = false;
             }
         }
-    }
-    private void Disappearing()
-    {
-        transform.localScale = Vector3.SmoothDamp(transform.localScale, CachedMath.Vector3Zero, ref _smoothDampVelocity,
-            _durationWithSmoothDampCoef, float.MaxValue, Time.unscaledDeltaTime);
+        protected virtual void Awake()
+        {
+            _durationWithSmoothDampCoef = _durationSec / _smoothDampCoefficient;
 
-        if (CachedMath.Compare(transform.localScale, CachedMath.Vector3Zero))
-        {
-            _smoothDampVelocity = CachedMath.Vector3Zero;
-            transform.localScale = CachedMath.Vector3Zero;
-            _disappearing = false;
-            enabled = false;
-            Disappeared?.Invoke();
-        }
-    }
-    private void CheckAndStartAppearingChildrens()
-    {
-        if (_childrensControl)
-        {
-            for (int i = 0; i < _childrens.Count; i++)
+            _baseVector = transform.localScale;
+            if (_baseVector.x == 0 || _baseVector.y == 0)
+                _baseVector = new Vector3(1f, 1f, 1f);
+
+            _appearingVector = _baseVector * _overscaleOnAppear;
+
+            _scrollRects = GetComponentsInChildren<ScrollRect>();
+
+            if (_scale0AtAwake)
             {
-                _childrens[i].StartAppearing();
+                CheckAndSetActiveScrollRects(false);
+                transform.localScale = Vector3.zero;
             }
-        }
-    }
-
-    private void CheckAndSetActiveScrollRects(bool isActive)
-    {
-        if (_scrollRects != null && _scrollRects.Length > 0)
-        {
-            for (int i = 0; i < _scrollRects.Length; i++)
+            if (_childrensControl)
             {
-                _scrollRects[i].gameObject.SetActive(isActive);
+                _childrens = new List<AppearingAndDisappearingObject>(
+                    GetComponentsInChildren<AppearingAndDisappearingObject>().Where(x => !x.IgnoreParentControl && x != this));
             }
+            if (!_appearing && !_disappearing)
+                enabled = false;
         }
-    }
-
-    public virtual void StartAppearing()
-    {
-        enabled = true;
-        _appearing = true;
-        transform.localScale = CachedMath.Vector3Zero;
-        if (_disappearing) { _disappearing = false;   }
-    }
-    public virtual void StartDisappearing()
-    {
-        CheckAndSetActiveScrollRects(false);
-        enabled = true;
-        _disappearing = true;
-
-        if (_childrensControl)
+        private void OnValidate()
         {
-            for (int i = 0; i < _childrens.Count; i++)
+            _durationWithSmoothDampCoef = _durationSec / _smoothDampCoefficient;
+        }
+        private void Update()
+        {
+            if (_appearing)
+                Appearing();
+
+            if (_disappearing)
+                Disappearing();
+        }
+        private void Appearing()
+        {
+            if (_animationAppearingStage == 0)
             {
-                _childrens[i].StartDisappearing();
+                transform.localScale = Vector3.SmoothDamp(transform.localScale, _appearingVector, ref _smoothDampVelocity,
+                    _durationWithSmoothDampCoef * 0.5f, float.MaxValue, Time.unscaledDeltaTime);
+
+                if (transform.localScale.Compare(_appearingVector))
+                {
+                    _animationAppearingStage = 1;
+                    _smoothDampVelocity = CachedMath.Vector3Zero;
+                }
+            }
+            else
+            {
+                transform.localScale = Vector3.SmoothDamp(transform.localScale, _baseVector, ref _smoothDampVelocity,
+                    _durationWithSmoothDampCoef * 0.5f, float.MaxValue, Time.unscaledDeltaTime);
+
+
+                if (transform.localScale.Compare(_baseVector))
+                {
+                    _smoothDampVelocity = CachedMath.Vector3Zero;
+                    _appearing = false;
+                    transform.localScale = _baseVector;
+                    enabled = false;
+                    Appeared?.Invoke();
+                    ResetAnimationAppearingStage();
+                    CheckAndSetActiveScrollRects(true);
+                    CheckAndStartAppearingChildrens();
+                }
             }
         }
-
-        if (_appearing) 
+        private void Disappearing()
         {
-            ResetAnimationAppearingStage();
-            _appearing = false; 
+            transform.localScale = Vector3.SmoothDamp(transform.localScale, CachedMath.Vector3Zero, ref _smoothDampVelocity,
+                _durationWithSmoothDampCoef, float.MaxValue, Time.unscaledDeltaTime);
+
+            if (transform.localScale.Compare(CachedMath.Vector3Zero))
+            {
+                _smoothDampVelocity = CachedMath.Vector3Zero;
+                transform.localScale = CachedMath.Vector3Zero;
+                _disappearing = false;
+                enabled = false;
+                Disappeared?.Invoke();
+            }
         }
-    }
-    private void ResetAnimationAppearingStage()
-    {
-        _animationAppearingStage = 0;
+        private void CheckAndStartAppearingChildrens()
+        {
+            if (_childrensControl)
+                _childrens.ForEach(x => x.StartAppearing());
+        }
+
+        private void CheckAndSetActiveScrollRects(bool isActive)
+        {
+            if (_scrollRects != null && _scrollRects.Length > 0)
+            {
+                for (int i = 0; i < _scrollRects.Length; i++)
+                {
+                    _scrollRects[i].gameObject.SetActive(isActive);
+                }
+            }
+        }
+        private void ResetAnimationAppearingStage() =>
+            _animationAppearingStage = 0;
     }
 }

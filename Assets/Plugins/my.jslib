@@ -1,26 +1,5 @@
 mergeInto(LibraryManager.library, {
 
-	GiveMePlayerData: function () {
-    	myGameInstance.SendMessage('Yandex', 'SetName', player.getName());
-    	myGameInstance.SendMessage('Yandex', 'SetPhoto', player.getPhoto("medium"));
-      console.log(player.getName());
-  	},
-
-  	RateGame: function () {
-    
-    	ysdk.feedback.canReview()
-        .then(({ value, reason }) => {
-            if (value) {
-                ysdk.feedback.requestReview()
-                    .then(({ feedbackSent }) => {
-                        console.log(feedbackSent);
-                    })
-            } else {
-                console.log(reason)
-            }
-        })
-  	},
-
     AuthorizationYG: function () {
             ysdk.getPlayer({ scopes: false }).then(_player => {      
                 player = _player;
@@ -29,7 +8,7 @@ mergeInto(LibraryManager.library, {
 
                 }
                 else{
-                    myGameInstance.SendMessage('Yandex', 'HideAuthorizationYandexButtonAndLoadData');
+                    myGameInstance.SendMessage('Yandex', 'InformAuthorized');
                 }
             }).catch(err => {
                 console.log("Auth1 failed");
@@ -41,7 +20,7 @@ mergeInto(LibraryManager.library, {
             
              // Èãðîê óñïåøíî àâòîðèçîâàí
              console.log("Autorization succeeded");            
-             myGameInstance.SendMessage('Yandex', 'HideAuthorizationYandexButtonAndLoadData');
+             myGameInstance.SendMessage('Yandex', 'InformAuthorized');
              AuthorizationYG();
         }).catch(() => {
 
@@ -62,7 +41,7 @@ mergeInto(LibraryManager.library, {
     LoadExtern: function () {
       player.getData().then(_data => {
         const myJSON = JSON.stringify(_data);
-        myGameInstance.SendMessage('DataLoader', 'CompareDataFromTheDeviceAndFromTheCloud', myJSON);
+        myGameInstance.SendMessage('Yandex', 'SendDataFromTheCloud', myJSON);
      // })
         }).catch(err => {
         // Îøèáêà ïðè èíèöèàëèçàöèè îáúåêòà Player.
@@ -88,10 +67,10 @@ mergeInto(LibraryManager.library, {
       ysdk.adv.showFullscreenAdv({
         callbacks: {
           onClose: function(wasShown) {
-             myGameInstance.SendMessage('Ads', 'OnInterstitialAdsClosed');
+             myGameInstance.SendMessage('Yandex', 'OnInterstitialAdsClosed');
           },
           onError: function(error) {
-             myGameInstance.SendMessage('Ads', 'OnInterstitialAdsClosed');
+             myGameInstance.SendMessage('Yandex', 'OnInterstitialAdsClosed');
           }
         }
       })
@@ -101,18 +80,18 @@ mergeInto(LibraryManager.library, {
       ysdk.adv.showRewardedVideo({
         callbacks: {
           onOpen: () => {
-          console.log('Video ad open.');
+            console.log('Video ad open.');
           },
           onRewarded: () => {
-          console.log('Rewarded!');
-          myGameInstance.SendMessage('Ads', 'OnAdsReceivedReward');
+            console.log('Rewarded!');
+            myGameInstance.SendMessage('Yandex', 'OnAdsReceivedReward');
           },
           onClose: () => {
-          console.log('Video ad closed.');
-          myGameInstance.SendMessage('Ads', 'OnRewardedAdsClosed');
+            console.log('Video ad closed.');
+            myGameInstance.SendMessage('Yandex', 'OnRewardedAdsClosed');
           }, 
           onError: (e) => {
-          myGameInstance.SendMessage('Ads', 'OnRewardedAdsEror');
+            myGameInstance.SendMessage('Yandex', 'OnRewardedAdsEror');
           }
         }
       })

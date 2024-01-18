@@ -1,41 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class TimerWithPause
+namespace Helpers
 {
-    private float _elapsedTime;
-    private float _countdownTime;
-    private bool _pause;
-    public void Start(float countdownTime)
+    public class TimerWithPause
     {
-        _countdownTime = countdownTime;
-        _elapsedTime = 0;
-    }
+        public bool IsEvent =>
+           _elapsedTime > _countdownTime;
 
-    public void Update()
-    {
-        if (!_pause && _elapsedTime < _countdownTime)
+        private float _elapsedTime;
+        private float _countdownTime;
+        private bool _pause;
+        public void Start(float countdownTime)
         {
-            _elapsedTime += Time.deltaTime;
+            _countdownTime = countdownTime;
+            _elapsedTime = 0;
         }
-    }
-    public void Pause()
-    {
-        _pause = true;
-    }
-    public void TurnOffPause()
-    {
-        _pause = false;
-    }
-    public bool IsEvent()
-    {
-        return _elapsedTime > _countdownTime;
-    }
-    public void Zeroing()
-    {
-        _elapsedTime = 0f;
-    }
 
+        public void Update()
+        {
+            if (!_pause && _elapsedTime < _countdownTime)
+                _elapsedTime += Time.deltaTime;
+        }
+        public void Pause() =>
+            _pause = true;
+        public void TurnOffPause()
+            => _pause = false;
+        public void Zeroing() =>
+            _elapsedTime = 0f;
+
+    }
 }

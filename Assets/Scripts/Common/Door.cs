@@ -1,107 +1,120 @@
+using Helpers;
+using Helpers.Math;
+using KillerDoors.StaticDataSpace;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoCache
+namespace KillerDoors.Common
 {
-    [SerializeField] private Transform _meshGO;
-    private BoxCollider _boxCollider;
-    [field: SerializeField] public float OpenTime { get; private set; } = 1f;
-    private float _openTimeWithCoef;
-    [SerializeField] private float _closeTime = 0.05f;
-    private float _closeTimeWithCoef;
-
-    public event Action<Person> PersonKilled;
-
-    [SerializeField] private Vector3 _openState = new Vector3(0f, -280f, 0f) ;
-    [SerializeField] private Vector3 _closeState = new Vector3(0f, -160f, 0f);
-    private bool _isOpening;
-    private bool _isClosing;
-    private bool _resettedOnClosing;
-    
-    private Vector3 _smoothDampVelocity = CachedMath.Vector3Zero;
-    public event Action<float> OpenProgress;
-    protected void Start()
+    public class Door : MonoBehaviour
     {
-        _boxCollider = GetComponentInChildren<BoxCollider>();
-        GetComponentInChildren<Trigger>().OnEnter += OnEnter;
-        _closeTimeWithCoef = _closeTime / 5.9f; // coefficient of dismiss SmoothDamp
-        _openTimeWithCoef = OpenTime / 5.9f;
-    }
-    protected override void OnTick()
-    {
-        if (_isClosing)
-        {
-            Closing();
-        }
-        else if (_isOpening)
-        {
-            Opening();
-        }
-    }
+        public event Action<Person> PersonKilled;
+        public event Action<float> OpenProgress;
 
-    private void Opening()
-    {
-        _meshGO.localEulerAngles = CachedMath.SmoothDampAngle(_meshGO.localEulerAngles, _openState, ref _smoothDampVelocity, _openTimeWithCoef, float.MaxValue, Time.deltaTime);
-        if (!_resettedOnClosing)
-        {
-            OpenProgress?.Invoke(1f - (_meshGO.localEulerAngles.y - _openState.y) / (_closeState.y - _openState.y));
-        }
-        if (_meshGO.localEulerAngles.CompareAngles(_openState))
-        {
-            ResetDoor();
-        }
-    }
+        [SerializeField] private Transform _meshTransform;
+        [SerializeField] private BoxCollider _boxCollider;
+        [SerializeField] private Trigger _trigger;
+        [SerializeField] private Vector3 _openState = new Vector3(0f, -280f, 0f);
+        [SerializeField] private Vector3 _closeState = new Vector3(0f, -160f, 0f);
+        [field: SerializeField] public float OpenTime { get; private set; }
+        [SerializeField] private float _closeTime;
+        private float _openTimeWithCoef;
+        private float _closeTimeWithCoef;
+        private const float SmoothDampDismissCoefficient = 5.9f;
 
-    private void Closing()
-    {
-        _meshGO.localEulerAngles = CachedMath.SmoothDampAngle(_meshGO.localEulerAngles, _closeState, ref _smoothDampVelocity, _closeTimeWithCoef, float.MaxValue, Time.deltaTime);
-        if (_meshGO.localEulerAngles.CompareAngles(_closeState))
+        private bool _isOpening;
+        private bool _isClosing;
+        private bool _resettedOnClosing;
+
+        private Vector3 _smoothDampVelocity = CachedMath.Vector3Zero;
+        private float PersentageOfReadiness =>
+            1f - (_meshTransform.localEulerAngles.y - _openState.y) / (_closeState.y - _openState.y);
+        public void Init(DoorStaticData data)
+        {
+            _trigger.OnEnter += OnEnter;
+
+            OpenTime = data.baseOpenTime;
+            _closeTime = data.baseCloseTime;
+            _closeTimeWithCoef = _closeTime / SmoothDampDismissCoefficient;
+            _openTimeWithCoef = OpenTime / SmoothDampDismissCoefficient;
+        }
+        public void UpgradeTimeReset(float upgradeStepOpenTime)
+        {
+            OpenTime -= upgradeStepOpenTime;
+            _openTimeWithCoef = OpenTime / SmoothDampDismissCoefficient;
+        }
+        public void Close()
+        {
+            _resettedOnClosing = false;
+            _isClosing = true;
+            _isOpening = false;
+            enabled = true;
+            _boxCollider.enabled = true;
+        }        
+        // With animation continue
+        public void InstantResetState()
+        {
+            OpenProgress?.Invoke(1f);
+            _resettedOnClosing = true;
+        }
+        private void Update()
+        {
+            if (_isClosing)
+                Closing();
+            else if (_isOpening)
+                Opening();
+        }
+        private void Opening()
+        {
+            _meshTransform.localEulerAngles = MathExtensions.SmoothDampAngle(_meshTransform.localEulerAngles, _openState, ref _smoothDampVelocity,
+                _openTimeWithCoef, float.MaxValue, Time.deltaTime);
+
+            if (!_resettedOnClosing)
+                OpenProgress?.Invoke(PersentageOfReadiness);
+
+            if (_meshTransform.localEulerAngles.CompareAngles(_openState))
+                ResetState();
+        }
+
+        private void Closing()
+        {
+            _meshTransform.localEulerAngles = MathExtensions.SmoothDampAngle(_meshTransform.localEulerAngles, _closeState, ref _smoothDampVelocity,
+                _closeTimeWithCoef, float.MaxValue, Time.deltaTime);
+
+            if (_meshTransform.localEulerAngles.CompareAngles(_closeState))
+                OnDoorOpened();
+        }
+        private void OnDoorOpened()
         {
             _isClosing = false;
             _isOpening = true;
             _smoothDampVelocity = CachedMath.Vector3Zero;
             _boxCollider.enabled = false;
         }
-    }
-
-    public void Close()
-    {
-        _resettedOnClosing = false;
-        enabled = true;
-        _isClosing = true;
-        _isOpening = false;
-        _boxCollider.enabled = true;
-    }
-    private void ResetDoor()
-    {
-        _boxCollider.enabled = true;
-        OpenProgress?.Invoke(1f);
-        _meshGO.localEulerAngles = _openState;
-        _smoothDampVelocity = CachedMath.Vector3Zero;
-        _isClosing = false;
-        _isOpening = false;
-        enabled = false;
-    }
-    // With animation continue
-    public void InstantResetDoor()
-    {
-        OpenProgress?.Invoke(1f);
-        _resettedOnClosing = true;
-    }
-    public void UpgradeTimeReset(float upgradeStepOpenTime)
-    {
-        OpenTime -= upgradeStepOpenTime;
-        _openTimeWithCoef = OpenTime / 5.9f;
-    }
-    private void OnEnter(Collider other)
-    {
-        if (other.TryGetComponent<Person>(out Person person))
+        private void ResetState()
         {
-            person.Kill();
-            PersonKilled?.Invoke(person);
-            InstantResetDoor();
+            OpenProgress?.Invoke(1f);
+            _meshTransform.localEulerAngles = _openState;
+            _smoothDampVelocity = CachedMath.Vector3Zero;
+            _isClosing = false;
+            _isOpening = false;
+            _boxCollider.enabled = true;
+            enabled = false;
+        }
+        private void OnEnter(Collider other)
+        {
+            if (other.TryGetComponent(out Person person))
+            {
+                person.Kill();
+                PersonKilled?.Invoke(person);
+            }
+        }
+        private void OnDestroy()
+        {
+            PersonKilled = null;
+            OpenProgress = null;
+            if (_trigger)
+                _trigger.OnEnter -= OnEnter;
         }
     }
 }

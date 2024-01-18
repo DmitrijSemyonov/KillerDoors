@@ -8,30 +8,40 @@ ModelImporter:
     second: mixamo.com
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch31_body
+    second: {fileID: 2100000, guid: 1415c42af50e9ee41842b66246fbed48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch31_hair
+    second: {fileID: 2100000, guid: 24f3d7da240ea714fa027a1e10c0b4e1, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch31_1001_Diffuse
-    second: {fileID: 2800000, guid: b235544f77a075443a8775ecee5e3226, type: 3}
+    second: {fileID: 2800000, guid: e38cfd60386b7a640913355919a03268, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch31_1001_Glossiness
-    second: {fileID: 2800000, guid: af385ddd7697d7f4a96238d4d593163f, type: 3}
+    second: {fileID: 2800000, guid: 3ea2720543109204a8e0e626cdc40aaa, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch31_1001_Normal
-    second: {fileID: 2800000, guid: 52e354d23f77ff14c96cec2d95535063, type: 3}
+    second: {fileID: 2800000, guid: ba5ac0c095c20824e9669e85f32eb18a, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch31_1001_Specular
-    second: {fileID: 2800000, guid: b002536fffcefbc4a8d649718e08115e, type: 3}
+    second: {fileID: 2800000, guid: 9d44f145fba2f7748a64af6287b7233f, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ch31_1002_Diffuse
-    second: {fileID: 2800000, guid: 49033388dc0d5d44d9e62838782e7d70, type: 3}
+    second: {fileID: 2800000, guid: b1fcd43480f779940be7e7146d9a5594, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -103,8 +113,8 @@ ModelImporter:
     importLights: 1
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
-    swapUVChannels: 0
-    generateSecondaryUV: 0
+    swapUVChannels: 1
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -127,7 +137,7 @@ ModelImporter:
     strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0

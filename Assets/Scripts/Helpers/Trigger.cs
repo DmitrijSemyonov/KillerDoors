@@ -1,14 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger : MonoBehaviour
+namespace Helpers
 {
-    public event Action<Collider> OnEnter;
-
-    private void OnTriggerEnter(Collider other)
+    public class Trigger : MonoBehaviour
     {
-        OnEnter?.Invoke(other);
+        public event Action<Collider> OnEnter;
+
+        private void OnTriggerEnter(Collider other) => 
+            OnEnter?.Invoke(other);
+
+        private void OnDestroy() => 
+            OnEnter = null;
     }
 }

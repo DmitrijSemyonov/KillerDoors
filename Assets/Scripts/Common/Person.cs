@@ -1,30 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
+using Helpers.Math;
+using KillerDoors.Services.Factories;
+using KillerDoors.Services.StaticDataSpace;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Person : MonoCache
+namespace KillerDoors.Common
 {
-    [SerializeField] private float _moveSpeed = 3f;
-    public ParticleSystem[] explosions;
-    void Start()
+    public class Person : MonoBehaviour
     {
-        explosions = GetComponentsInChildren<ParticleSystem>();
-    }
+        [SerializeField] private PersonType _type;
+        [Header("Edit in Game Static Data")]
+        [SerializeField] private float _moveSpeed;
 
-    protected override void OnTick()
-    {
-        transform.Translate(CachedMath.VectorForward * Time.deltaTime * _moveSpeed);
-    }
+        public ParticleSystem[] explosions;
 
-    public void Kill()
-    {
-        for(int i =0; i < explosions.Length; i++)
+        public event Action<Person> Destroyed;
+        private void Start() =>
+            explosions = GetComponentsInChildren<ParticleSystem>();
+        public void Construct(IStaticDataService staticDataService)
         {
-            explosions[i].Play();
-            explosions[i].gameObject.transform.parent = null;
-            Destroy(explosions[i].gameObject, 1f);
+            int index = (int)_type - 1;
+            _moveSpeed = staticDataService.GetGameData().moveSpeedsPersons[index];
         }
-        Destroy(gameObject);
+        private void Update() => 
+            transform.Translate(CachedMath.VectorForward * Time.deltaTime * _moveSpeed);
+
+        public void Kill()
+        {
+            for (int i = 0; i < explosions.Length; i++)
+            {
+                explosions[i].Play();
+                explosions[i].gameObject.transform.parent = null;
+                Destroy(explosions[i].gameObject, 1f);
+            }
+            DestroyPerson();
+        }
+        public void DestroyPerson()
+        {
+            Destroyed?.Invoke(this);
+            Destroy(gameObject);
+        }
+        private void OnDestroy() =>
+            Destroyed = null;
     }
 }

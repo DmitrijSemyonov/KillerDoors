@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ecc35ca73d5cd4e9cb2d9e0b47e191, type: 3}
+  m_Name: Game
+  m_EditorClassIdentifier: 
+  levelKey: Game
+  doorsDatas:
+  - id: Game_d37f1128-4e80-482e-b8d1-6784ac364a7a
+    position: {x: 19.75, y: -18.878447, z: 3.1000004}
+    rotation: {x: -0, y: 90, z: -0}
+    baseOpenTime: 0.8
+    baseCloseTime: 0.1
+    doorUpgradeViewOffset: {x: 0, y: 0, z: 0}
+  - id: Game_7e0c4a77-e8be-48d4-b1cb-89b24d01970f
+    position: {x: 19.75, y: 26.321552, z: 30.000002}
+    rotation: {x: -0, y: 90, z: -0}
+    baseOpenTime: 1.5
+    baseCloseTime: 0.1
+    doorUpgradeViewOffset: {x: 0, y: 0, z: 0}
+  - id: Game_8b845dcd-f258-4fdd-9bf4-913f6629d6fe
+    position: {x: 19.75, y: 47.23056, z: 11.941639}
+    rotation: {x: -0, y: 90, z: -0}
+    baseOpenTime: 0.8
+    baseCloseTime: 0.1
+    doorUpgradeViewOffset: {x: 0, y: 0, z: 0}
+  - id: Game_b7e0fa22-4880-4bb7-8e30-af3449b3275b
+    position: {x: 19.75, y: 2.7215524, z: 28.6}
+    rotation: {x: -0, y: 90, z: -0}
+    baseOpenTime: 0.8
+    baseCloseTime: 0.1
+    doorUpgradeViewOffset: {x: 0, y: 0, z: 0}
+  - id: Game_bf83caeb-ace1-4806-8ba3-4df8cb1a6f91
+    position: {x: 19.75, y: 2.2215524, z: 3.1000004}
+    rotation: {x: -0, y: 90, z: -0}
+    baseOpenTime: 1.5
+    baseCloseTime: 0.1
+    doorUpgradeViewOffset: {x: 0, y: 0, z: 0}
+  - id: Game_bfdb3854-abd6-4a8e-8354-61ac778f713b
+    position: {x: 19.75, y: 47.23056, z: -14.06836}
+    rotation: {x: -0, y: 90, z: -0}
+    baseOpenTime: 1.5
+    baseCloseTime: 0.1
+    doorUpgradeViewOffset: {x: 0, y: 0, z: 0}
+  - id: Game_e5b59696-e45f-4438-9519-afc7e671c982
+    position: {x: 19.75, y: 25.671553, z: -13.668361}
+    rotation: {x: -0, y: 90, z: -0}
+    baseOpenTime: 0.8
+    baseCloseTime: 0.1
+    doorUpgradeViewOffset: {x: 0, y: 0, z: 0}
+  looseTriggerPosition: {x: 21.54, y: 15.1, z: 78.4}
+  spawnPointsDatas:
+  - id: Game_8f0aaa39-ab76-40f6-9e2e-bb389a6e5913
+    position: {x: 23.79935, y: -19.078445, z: -52.65}
+    floorNumber: 0
+  - id: Game_68bc0f86-5de4-4218-8b30-6b24677857be
+    position: {x: 23.79935, y: 2.421552, z: -52.65}
+    floorNumber: 1
+  - id: Game_c394a1a1-0519-4493-b075-a9b857ab5f1b
+    position: {x: 23.79935, y: 25.52155, z: -52.65}
+    floorNumber: 2
+  - id: Game_0698b64f-6d40-4afd-b2e6-6f4d540a0bdb
+    position: {x: 23.79935, y: 47.13055, z: -52.65}
+    floorNumber: 3
