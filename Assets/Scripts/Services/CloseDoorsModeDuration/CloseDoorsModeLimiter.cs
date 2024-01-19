@@ -30,18 +30,19 @@ namespace KillerDoors.Services.CloseDoorModeDuration
         public void Init(LosingZone losingZone)
         {
             _doorGameDuration = _staticDataService.GetGameData().doorGameDuration;
+
             _losingZone = losingZone;
+
+            Subscribes();
         }
         public void StartGame()
         {
-            _losingZone.LosePerson += PersonLosed;
             _startTimeDoorGame = Time.time;
             _personSpawner.StartSpawn();
         }
-        public void Describes()
+        private void Subscribes()
         {
-            if (_losingZone)
-                _losingZone.LosePerson -= PersonLosed;
+            _losingZone.LosePerson += PersonLosed;
         }
         private void PersonLosed(Vector3 _)
         {

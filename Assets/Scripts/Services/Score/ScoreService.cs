@@ -27,14 +27,9 @@ namespace KillerDoors.Services.ScoreSpace
             _doors = doors;
             _losingZone = losingZone;
             _inventory = inventory;
-        }
 
-        public void Subscribes()
-        {
-            _doors.ForEach(door => door.PersonKilled += AddPointsPerPerson);
-            _losingZone.LosePerson += OnPersonLosed;
+            Subscribes();
         }
-
         public void AddPointsPerPerson(Person person)
         {
             _combo++;
@@ -69,16 +64,10 @@ namespace KillerDoors.Services.ScoreSpace
             _progress.ObservableProgress.points.Value > 0
             ? (int)Math.Log(_progress.ObservableProgress.points.Value, 2)
             : 0;
-
-        public void Describes()
+        private void Subscribes()
         {
-            for (int i = 0; i < _doors.Count; i++)
-            {
-                if (_doors[i] != null)
-                    _doors[i].PersonKilled -= AddPointsPerPerson;
-            }
-            if (_losingZone != null)
-                _losingZone.LosePerson -= OnPersonLosed;
+            _doors.ForEach(door => door.PersonKilled += AddPointsPerPerson);
+            _losingZone.LosePerson += OnPersonLosed;
         }
         private void OnPersonLosed(Vector3 _) =>
             _combo = 0;

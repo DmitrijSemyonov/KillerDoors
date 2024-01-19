@@ -15,7 +15,7 @@ MonoBehaviour:
   prices:
     protectionPrices: 0600000019000000640000009001000040060000
     dinamitPrices: 0400000010000000400000000001000000040000
-  upgrade:
+  upgradeDoor:
     openTimeDoorUpgradeStep: 0.02
     maxDoorUpgrade: 24
   spawnPerson:
@@ -41,6 +41,7 @@ MonoBehaviour:
     scaleSpeed: 2
     onDownScaleCoefficient: 0.8
     delayBetweenAnimationParts: 0.5
+  deathEffectOffset: {x: 0, y: 5, z: 0.2}
   coinUpgradeChancesOnLevels:
   - 50
   - 50

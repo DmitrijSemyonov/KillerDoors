@@ -8,7 +8,6 @@ using KillerDoors.Services.GameSounds;
 using KillerDoors.Services.Merge;
 using KillerDoors.Services.PersonSpawn;
 using KillerDoors.Services.ProgressSpace;
-using KillerDoors.Services.SaveLoad;
 using KillerDoors.Services.SceneLoad;
 using KillerDoors.Services.ScoreSpace;
 using KillerDoors.Services.ShopSpace;
@@ -48,8 +47,8 @@ namespace KillerDoors.StateMachine.States
         private readonly ISounds _sounds;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingPanel loadingPanel, IDoorFactory doorFactory,
-            IProgressService progressService, IDoorController doorController, IMergeService mergeService, IScoreService scoreService, 
-            IStaticDataService staticDataService, ILosingZoneFactory losingZoneFactory, IUIFactory uIFactory, IDoorUpgradeService doorUpgradeService, 
+            IProgressService progressService, IDoorController doorController, IMergeService mergeService, IScoreService scoreService,
+            IStaticDataService staticDataService, ILosingZoneFactory losingZoneFactory, IUIFactory uIFactory, IDoorUpgradeService doorUpgradeService,
             IShopService shop, IWindowsService windowsService, IPersonSpawner personSpawner, ICloseDoorsModeLimiter closeDoorsModeController,
             ISpotAppearanceViewService spotAppearanceViewService, IEducationService educationService, ISounds sounds)
         {

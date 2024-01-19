@@ -53,8 +53,7 @@ namespace KillerDoors.StateMachine
                 [typeof(MergeCoinsState)] = new MergeCoinsState(services.Single<IWindowsService>()),
 
                 [typeof(CloseDoorState)] = new CloseDoorState(services.Single<IWindowsService>(), services.Single<IScoreService>(),
-                services.Single<ICloseDoorsModeLimiter>(), services.Single<IDoorController>(), services.Single<ISpotAppearanceViewService>(),
-                services.Single<ITimeService>()),
+                services.Single<ICloseDoorsModeLimiter>(), services.Single<IDoorController>(), services.Single<ITimeService>()),
             };
         }
 

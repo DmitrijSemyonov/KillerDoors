@@ -13,6 +13,8 @@ namespace KillerDoors.StaticDataSpace
         public Ads ads;
         public FingerView fingerViewAnimationData;
 
+        public Vector3 deathEffectOffset = new Vector3(0f, 1f, 0.06f);
+
         public float[] coinUpgradeChancesOnLevels = new float[] { 50f, 50f, 40f, 40f, 30f, 30f, 25f, 25f, 20f, 20f, 20f, 15f };
 
         public float[] moveSpeedsPersons = new float[3] { 20f, 30f, 40f };

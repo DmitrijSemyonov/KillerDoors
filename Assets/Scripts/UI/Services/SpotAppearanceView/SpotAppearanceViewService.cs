@@ -43,15 +43,12 @@ namespace KillerDoors.UI.SpotAppearanceSpace
             _mainCamera = Camera.main;
             _spotAppearanceViewData = _staticDataService.GetGameData().spotAppearanceViewData;
             _pool = new PoolSpotAppearanceView(_UIFactory);
+
+            SubscribeSceneObjects();
         }
-        public void SubscribeSceneObjects()
+        private void SubscribeSceneObjects()
         {
             _losingZone.LosePerson += ShowZeroingCombo;
-        }
-        public void DescribesSceneObjects()
-        {
-            if (_losingZone)
-                _losingZone.LosePerson -= ShowZeroingCombo;
         }
         private void ShowEarningPoints(Vector3 worldPosition, int points)
         {

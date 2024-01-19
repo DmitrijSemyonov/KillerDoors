@@ -20,6 +20,7 @@ using KillerDoors.Services.ShopSpace;
 using KillerDoors.Services.StaticDataSpace;
 using KillerDoors.Services.TimeSpace;
 using KillerDoors.Services.UpgradeDoor;
+using KillerDoors.Services.VFX;
 using KillerDoors.Services.WebMediatorSpace;
 using KillerDoors.UI.Factories;
 using KillerDoors.UI.SpotAppearanceSpace;
@@ -168,6 +169,12 @@ namespace KillerDoors.StateMachine.States
 
             ISounds sounds = new Sounds(mergeService, soundsFactory);
             _services.RegisterSingle(sounds);
+
+            IVFXFactory VFXFactory = new VFXFactory(assetProvider);
+            _services.RegisterSingle(VFXFactory);
+
+            IVFXService VFXService = new VFXService(VFXFactory, staticDataService, scoreService);
+            _services.RegisterSingle(VFXService);
         }
 
         public void Exit()

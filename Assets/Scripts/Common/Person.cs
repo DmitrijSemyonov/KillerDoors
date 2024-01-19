@@ -12,11 +12,7 @@ namespace KillerDoors.Common
         [Header("Edit in Game Static Data")]
         [SerializeField] private float _moveSpeed;
 
-        public ParticleSystem[] explosions;
-
         public event Action<Person> Destroyed;
-        private void Start() =>
-            explosions = GetComponentsInChildren<ParticleSystem>();
         public void Construct(IStaticDataService staticDataService)
         {
             int index = (int)_type - 1;
@@ -25,16 +21,8 @@ namespace KillerDoors.Common
         private void Update() => 
             transform.Translate(CachedMath.VectorForward * Time.deltaTime * _moveSpeed);
 
-        public void Kill()
-        {
-            for (int i = 0; i < explosions.Length; i++)
-            {
-                explosions[i].Play();
-                explosions[i].gameObject.transform.parent = null;
-                Destroy(explosions[i].gameObject, 1f);
-            }
+        public void Kill() =>
             DestroyPerson();
-        }
         public void DestroyPerson()
         {
             Destroyed?.Invoke(this);
